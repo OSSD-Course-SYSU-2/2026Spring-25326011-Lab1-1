@@ -1,0 +1,83 @@
+import { Category } from '../../types/models';
+
+@Component
+export struct CategoryList {
+  @Prop categories: Category[] = [];
+  private onEdit?: (category: Category) => void;
+  private onDelete?: (id: string) => void;
+
+  build() {
+    if (this.categories.length === 0) {
+      Column() {
+        Text('暂无分类数据')
+          .fontSize(16)
+          .fontColor('#999999')
+          .margin({ top: 40 })
+      }
+      .width('100%')
+      .height('100%')
+      .justifyContent(FlexAlign.Center)
+    } else {
+      List({ space: 12 }) {
+        ForEach(this.categories, (category: Category) => {
+          ListItem() {
+            Row() {
+              Column() {
+                Text(category.name)
+                  .fontSize(16)
+                  .fontWeight(FontWeight.Bold)
+                  .fontColor('#333333')
+                  .margin({ bottom: 4 })
+
+                if (category.description) {
+                  Text(category.description)
+                    .fontSize(14)
+                    .fontColor('#666666')
+                }
+              }
+              .layoutWeight(1)
+              .alignItems(HorizontalAlign.Start)
+
+              Row() {
+                Button('编辑')
+                  .height(32)
+                  .fontSize(14)
+                  .fontColor('#3B82F6')
+                  .backgroundColor('#EBF5FF')
+                  .onClick(() => {
+                    if (this.onEdit) {
+                      this.onEdit(category);
+                    }
+                  })
+                  .margin({ right: 8 })
+
+                Button('删除')
+                  .height(32)
+                  .fontSize(14)
+                  .fontColor('#EF4444')
+                  .backgroundColor('#FEE2E2')
+                  .onClick(() => {
+                    if (this.onDelete) {
+                      this.onDelete(category.id);
+                    }
+                  })
+              }
+            }
+            .width('100%')
+            .padding(16)
+            .backgroundColor('#FFFFFF')
+            .borderRadius(8)
+            .shadow({
+              radius: 2,
+              color: '#1A000000',
+              offsetY: 2
+            })
+          }
+        }, (category: Category) => category.id)
+      }
+      .width('100%')
+      .layoutWeight(1)
+      .padding({ left: 16, right: 16, top: 16, bottom: 16 })
+    }
+  }
+}

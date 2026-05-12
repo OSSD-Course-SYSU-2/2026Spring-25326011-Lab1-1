@@ -1,0 +1,142 @@
+[
+  {
+    "id": "question_001",
+    "content": "床前明月光，疑是地上霜",
+    "poemId": "poem_001",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_002",
+    "content": "举头望明月，低头思故乡",
+    "poemId": "poem_001",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_003",
+    "content": "春眠不觉晓，处处闻啼鸟",
+    "poemId": "poem_002",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_004",
+    "content": "夜来风雨声，花落知多少",
+    "poemId": "poem_002",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_005",
+    "content": "白日依山尽，黄河入海流",
+    "poemId": "poem_003",
+    "difficulty": 2,
+    "categoryIds": []
+  },
+  {
+    "id": "question_006",
+    "content": "欲穷千里目，更上一层楼",
+    "poemId": "poem_003",
+    "difficulty": 2,
+    "categoryIds": []
+  },
+  {
+    "id": "question_007",
+    "content": "红豆生南国，春来发几枝",
+    "poemId": "poem_004",
+    "difficulty": 2,
+    "categoryIds": []
+  },
+  {
+    "id": "question_008",
+    "content": "愿君多采撷，此物最相思",
+    "poemId": "poem_004",
+    "difficulty": 2,
+    "categoryIds": []
+  },
+  {
+    "id": "question_009",
+    "content": "千山鸟飞绝，万径人踪灭",
+    "poemId": "poem_005",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_010",
+    "content": "孤舟蓑笠翁，独钓寒江雪",
+    "poemId": "poem_005",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_011",
+    "content": "锄禾日当午，汗滴禾下土",
+    "poemId": "poem_006",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_012",
+    "content": "谁知盘中餐，粒粒皆辛苦",
+    "poemId": "poem_006",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_013",
+    "content": "鹅鹅鹅，曲项向天歌",
+    "poemId": "poem_007",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_014",
+    "content": "白毛浮绿水，红掌拨清波",
+    "poemId": "poem_007",
+    "difficulty": 1,
+    "categoryIds": []
+  },
+  {
+    "id": "question_015",
+    "content": "少小离家老大回，乡音无改鬓毛衰",
+    "poemId": "poem_008",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_016",
+    "content": "儿童相见不相识，笑问客从何处来",
+    "poemId": "poem_008",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_017",
+    "content": "李白乘舟将欲行，忽闻岸上踏歌声",
+    "poemId": "poem_009",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_018",
+    "content": "桃花潭水深千尺，不及汪伦送我情",
+    "poemId": "poem_009",
+    "difficulty": 3,
+    "categoryIds": []
+  },
+  {
+    "id": "question_019",
+    "content": "朝辞白帝彩云间，千里江陵一日还",
+    "poemId": "poem_010",
+    "difficulty": 4,
+    "categoryIds": []
+  },
+  {
+    "id": "question_020",
+    "content": "两岸猿声啼不住，轻舟已过万重山",
+    "poemId": "poem_010",
+    "difficulty": 4,
+    "categoryIds": []
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "猜诗词游戏模块"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "猜诗词游戏主入口"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "猜诗词游戏"
+    },
+    {
+      "name": "app_name",
+      "value": "猜诗词游戏"
+    }
+  ]
+}
