@@ -6,60 +6,30 @@ export struct HintDisplay {
 
   build() {
     if (this.hint) {
-      Row() {
-        // 上一句字数
-        if (this.hint.prevVerseCharCount > 0) {
-          Column() {
-            Text('上句')
-              .fontSize(12)
-              .fontColor('#999999')
-            Text(`${this.hint.prevVerseCharCount}字`)
+      Column() {
+        // 显示答案格式提示
+        Row() {
+          Text('答案格式: ')
+            .fontSize(14)
+            .fontColor('#666666')
+          
+          if (this.hint.currentVerseCharCount > 0) {
+            // 计算每句字数（总字数除以2）
+            Text(`${Math.floor(this.hint.currentVerseCharCount / 2)}×2`)
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
-              .fontColor('#333333')
-              .margin({ top: 4 })
+              .fontColor('#3B82F6')
           }
-          .layoutWeight(1)
-          .alignItems(HorizontalAlign.Center)
-
-          Text('|')
-            .fontSize(16)
-            .fontColor('#E5E7EB')
         }
-
-        // 当前句字数
-        Column() {
-          Text('本句')
-            .fontSize(12)
-            .fontColor('#999999')
-          Text(`${this.hint.currentVerseCharCount}字`)
-            .fontSize(16)
-            .fontWeight(FontWeight.Bold)
-            .fontColor('#3B82F6')
-            .margin({ top: 4 })
-        }
-        .layoutWeight(1)
-        .alignItems(HorizontalAlign.Center)
-
-        // 下一句字数
-        if (this.hint.nextVerseCharCount > 0) {
-          Text('|')
-            .fontSize(16)
-            .fontColor('#E5E7EB')
-
-          Column() {
-            Text('下句')
-              .fontSize(12)
-              .fontColor('#999999')
-            Text(`${this.hint.nextVerseCharCount}字`)
-              .fontSize(16)
-              .fontWeight(FontWeight.Bold)
-              .fontColor('#333333')
-              .margin({ top: 4 })
-          }
-          .layoutWeight(1)
-          .alignItems(HorizontalAlign.Center)
-        }
+        .width('100%')
+        .justifyContent(FlexAlign.Center)
+        .padding({ top: 8, bottom: 8 })
+        
+        // 提示说明
+        Text('请输入完整的上下句，中间用逗号分隔')
+          .fontSize(12)
+          .fontColor('#999999')
+          .margin({ top: 4 })
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 12, bottom: 12 })

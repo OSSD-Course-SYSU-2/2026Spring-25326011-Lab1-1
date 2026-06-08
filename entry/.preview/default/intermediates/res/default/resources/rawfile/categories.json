@@ -1,0 +1,27 @@
+[
+  {
+    "id": "category_001",
+    "name": "唐诗",
+    "description": "唐代诗歌"
+  },
+  {
+    "id": "category_002",
+    "name": "五言",
+    "description": "五言诗"
+  },
+  {
+    "id": "category_003",
+    "name": "七言",
+    "description": "七言诗"
+  },
+  {
+    "id": "category_004",
+    "name": "简单",
+    "description": "难度简单的题目"
+  },
+  {
+    "id": "category_005",
+    "name": "中等",
+    "description": "难度中等的题目"
+  }
+]

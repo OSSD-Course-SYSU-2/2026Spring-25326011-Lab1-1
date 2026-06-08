@@ -32,22 +32,6 @@ struct Index {
               url: 'pages/GamePage'
             });
           })
-          .margin({ bottom: 16 })
-
-        // 管理界面按钮
-        Button('管理界面')
-          .width('80%')
-          .height(56)
-          .fontSize(18)
-          .fontWeight(FontWeight.Bold)
-          .fontColor('#3B82F6')
-          .backgroundColor('#EBF5FF')
-          .borderRadius(12)
-          .onClick(() => {
-            router.pushUrl({
-              url: 'pages/ManagePage'
-            });
-          })
       }
       .width('100%')
       .layoutWeight(1)

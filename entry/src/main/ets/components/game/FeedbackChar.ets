@@ -20,14 +20,14 @@ export struct FeedbackChar {
 
   build() {
     Text(this.char)
-      .width(40)
-      .height(40)
-      .fontSize(20)
+      .width(24)
+      .height(24)
+      .fontSize(14)
       .fontWeight(FontWeight.Bold)
       .fontColor('#FFFFFF')
       .backgroundColor(this.getBackgroundColor())
-      .borderRadius(4)
+      .borderRadius(3)
       .textAlign(TextAlign.Center)
-      .margin({ right: 4 })
+      .margin({ right: 2 })
   }
 }

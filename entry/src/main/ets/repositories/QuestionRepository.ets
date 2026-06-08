@@ -3,22 +3,11 @@ import { Result } from '../types/results';
 import { BaseRepository } from './BaseRepository';
 
 /**
- * 题目仓储类
+ * 题目仓储类（简化版）
  */
 export class QuestionRepository extends BaseRepository<Question> {
   constructor(context: Context) {
     super(context, 'poetry_game_prefs', 'questions', 'questions.json');
-  }
-
-  /**
-   * 根据分类获取题目
-   * @param categoryId 分类ID
-   * @returns 该分类下的题目列表
-   */
-  async getByCategory(categoryId: string): Promise<Question[]> {
-    return this.items.filter((q: Question) => {
-      return q.categoryIds && q.categoryIds.includes(categoryId);
-    });
   }
 
   /**
@@ -31,22 +20,28 @@ export class QuestionRepository extends BaseRepository<Question> {
     }
 
     // Fisher-Yates洗牌算法
-    const shuffled = [...this.items];
+    const shuffled: Question[] = [];
+    for (const item of this.items) {
+      shuffled.push(item);
+    }
+    
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      const temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
     }
 
     return shuffled[0];
   }
 
   /**
-   * 根据诗词ID获取题目
-   * @param poemId 诗词ID
-   * @returns 该诗词下的题目列表
+   * 根据难度获取题目
+   * @param difficulty 难度等级
+   * @returns 该难度的题目列表
    */
-  async getByPoemId(poemId: string): Promise<Question[]> {
-    return this.items.filter((q: Question) => q.poemId === poemId);
+  async getByDifficulty(difficulty: number): Promise<Question[]> {
+    return this.items.filter((q: Question) => q.difficulty === difficulty);
   }
 
   /**
@@ -62,51 +57,6 @@ export class QuestionRepository extends BaseRepository<Question> {
     }
 
     question.difficulty = difficulty;
-    return await this.update(question);
-  }
-
-  /**
-   * 分配题目到分类
-   * @param questionId 题目ID
-   * @param categoryId 分类ID
-   * @returns 更新结果
-   */
-  async assignToCategory(questionId: string, categoryId: string): Promise<Result<Question>> {
-    const question = await this.getById(questionId);
-    if (!question) {
-      return { success: false, error: '未找到题目' };
-    }
-
-    if (!question.categoryIds) {
-      question.categoryIds = [];
-    }
-
-    if (!question.categoryIds.includes(categoryId)) {
-      question.categoryIds.push(categoryId);
-    }
-
-    return await this.update(question);
-  }
-
-  /**
-   * 从分类移除题目
-   * @param questionId 题目ID
-   * @param categoryId 分类ID
-   * @returns 更新结果
-   */
-  async removeFromCategory(questionId: string, categoryId: string): Promise<Result<Question>> {
-    const question = await this.getById(questionId);
-    if (!question) {
-      return { success: false, error: '未找到题目' };
-    }
-
-    if (question.categoryIds) {
-      const index = question.categoryIds.indexOf(categoryId);
-      if (index !== -1) {
-        question.categoryIds.splice(index, 1);
-      }
-    }
-
     return await this.update(question);
   }
 }

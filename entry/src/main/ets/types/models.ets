@@ -29,7 +29,9 @@ export interface Poem {
   title: string;
   author: string;
   dynasty: string;
-  verses: string[];
+  verses: string[];          // 诗句数组
+  punctuations?: string[];   // 标点符号数组
+  specialCouplets?: string[]; // 特殊对联组合
 }
 
 /**
@@ -37,10 +39,11 @@ export interface Poem {
  */
 export interface Question {
   id: string;
-  content: string;
-  poemId: string;
+  content: string;           // 完整诗句（上下句）
+  upperSentence?: string;    // 上句
+  lowerSentence?: string;    // 下句
   difficulty?: Difficulty;
-  categoryIds?: string[];
+  position?: string;         // 位置标识
 }
 
 /**

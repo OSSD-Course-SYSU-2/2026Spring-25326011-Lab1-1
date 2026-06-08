@@ -10,8 +10,8 @@ export class Validator {
    * @param value 待判断的值
    * @returns 是否为对象
    */
-  private static isObject(value: unknown): value is object {
-    return value !== null && typeof value === 'object';
+  private static isObject(value: Object | null | undefined): boolean {
+    return value !== null && value !== undefined && typeof value === 'object';
   }
 
   /**
@@ -19,12 +19,12 @@ export class Validator {
    * @param data 待验证的数据
    * @returns 验证结果
    */
-  static validatePoem(data: unknown): Result<Poem> {
+  static validatePoem(data: Object | null | undefined): Result<Poem> {
     if (!Validator.isObject(data)) {
       return { success: false, error: '数据不是有效的对象' };
     }
 
-    const obj = data as Record<string, unknown>;
+    const obj = data as Record<string, Object | null | undefined>;
 
     if (!obj.id || typeof obj.id !== 'string') {
       return { success: false, error: '缺少有效的id字段' };
@@ -60,12 +60,12 @@ export class Validator {
    * @param data 待验证的数据
    * @returns 验证结果
    */
-  static validateQuestion(data: unknown): Result<Question> {
+  static validateQuestion(data: Object | null | undefined): Result<Question> {
     if (!Validator.isObject(data)) {
       return { success: false, error: '数据不是有效的对象' };
     }
 
-    const obj = data as Record<string, unknown>;
+    const obj = data as Record<string, Object | null | undefined>;
 
     if (!obj.id || typeof obj.id !== 'string') {
       return { success: false, error: '缺少有效的id字段' };
@@ -87,12 +87,12 @@ export class Validator {
    * @param data 待验证的数据
    * @returns 验证结果
    */
-  static validateCategory(data: unknown): Result<Category> {
+  static validateCategory(data: Object | null | undefined): Result<Category> {
     if (!Validator.isObject(data)) {
       return { success: false, error: '数据不是有效的对象' };
     }
 
-    const obj = data as Record<string, unknown>;
+    const obj = data as Record<string, Object | null | undefined>;
 
     if (!obj.id || typeof obj.id !== 'string') {
       return { success: false, error: '缺少有效的id字段' };
@@ -110,7 +110,7 @@ export class Validator {
    * @param data 待验证的数据
    * @returns 验证结果
    */
-  static validatePoems(data: unknown): Result<Poem[]> {
+  static validatePoems(data: Object[] | null | undefined): Result<Poem[]> {
     if (!Array.isArray(data)) {
       return { success: false, error: '数据不是有效的数组' };
     }
@@ -121,7 +121,9 @@ export class Validator {
       if (!result.success) {
         return { success: false, error: result.error };
       }
-      poems.push(result.data!);
+      if (result.data) {
+        poems.push(result.data);
+      }
     }
 
     return { success: true, data: poems };
@@ -132,7 +134,7 @@ export class Validator {
    * @param data 待验证的数据
    * @returns 验证结果
    */
-  static validateQuestions(data: unknown): Result<Question[]> {
+  static validateQuestions(data: Object[] | null | undefined): Result<Question[]> {
     if (!Array.isArray(data)) {
       return { success: false, error: '数据不是有效的数组' };
     }
@@ -143,7 +145,9 @@ export class Validator {
       if (!result.success) {
         return { success: false, error: result.error };
       }
-      questions.push(result.data!);
+      if (result.data) {
+        questions.push(result.data);
+      }
     }
 
     return { success: true, data: questions };

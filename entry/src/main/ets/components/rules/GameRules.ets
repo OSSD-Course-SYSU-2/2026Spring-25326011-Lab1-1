@@ -175,7 +175,7 @@ export struct GameRules {
           .layoutWeight(1)
         }
         .width('90%')
-        .maxHeight('80%')
+        .height('80%')
         .padding(24)
         .backgroundColor('#FFFFFF')
         .borderRadius(12)

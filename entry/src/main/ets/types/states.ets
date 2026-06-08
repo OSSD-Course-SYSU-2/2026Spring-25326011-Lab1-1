@@ -1,3 +1,5 @@
+import { Poem, Question, Category, GuessRecord } from './models';
+
 /**
  * 游戏状态枚举
  */
@@ -50,6 +52,3 @@ export interface ManagePageState {
   searchKeyword: string;
   isLoading: boolean;
 }
-
-// 导入类型依赖
-import { Poem, Question, Category, GuessRecord } from './models';

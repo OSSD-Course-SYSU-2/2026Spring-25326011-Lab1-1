@@ -1,17 +1,10 @@
 {
+  "modelVersion": "6.0.2",
   "name": "guesspoetrygame",
   "version": "1.0.0",
   "description": "猜诗词游戏 - 基于Wordle机制的中文诗词猜谜游戏",
   "main": "",
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
-    "@ohos/hvigor-ohos-plugin": "5.0.0",
-    "@ohos/hvigor": "5.0.0"
-  },
-  "overrides": {
-    "@ohos/hvigor-ohos-plugin": "5.0.0",
-    "@ohos/hvigor": "5.0.0"
-  }
+  "dependencies": {}
 }

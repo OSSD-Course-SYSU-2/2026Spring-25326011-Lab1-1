@@ -2,12 +2,7 @@ import router from '@ohos.router';
 import { GameSession, GameState } from '../types/states';
 import { PoemRepository } from '../repositories/PoemRepository';
 import { QuestionRepository } from '../repositories/QuestionRepository';
-import { CategoryRepository } from '../repositories/CategoryRepository';
-import { PoemService } from '../services/PoemService';
-import { QuestionService } from '../services/QuestionService';
-import { CategoryService } from '../services/CategoryService';
 import { GameService } from '../services/GameService';
-import { DataService } from '../services/DataService';
 import { GameViewModel } from '../viewmodels/GameViewModel';
 import { AppTitleBar } from '../components/common/AppTitleBar';
 import { LoadingDialog } from '../components/common/LoadingDialog';
@@ -35,17 +30,11 @@ struct GamePage {
 
     const poemRepo = new PoemRepository(context);
     const questionRepo = new QuestionRepository(context);
-    const categoryRepo = new CategoryRepository(context);
 
     await poemRepo.init();
     await questionRepo.init();
-    await categoryRepo.init();
 
-    const poemService = new PoemService(poemRepo);
-    const questionService = new QuestionService(questionRepo);
-    const categoryService = new CategoryService(categoryRepo, questionRepo);
-    const gameService = new GameService(poemService, questionService);
-    const dataService = new DataService(poemService, questionService);
+    const gameService = new GameService(questionRepo, poemRepo);
 
     this.viewModel = new GameViewModel(gameService);
 
@@ -92,10 +81,6 @@ struct GamePage {
         showBack: true,
         onBackClick: () => {
           router.back();
-        },
-        rightIcon: 'sys.media.ohos_ic_public_settings',
-        onRightClick: () => {
-          router.pushUrl({ url: 'pages/ManagePage' });
         }
       })
 
@@ -114,11 +99,14 @@ struct GamePage {
           })
             .margin({ top: 16 })
 
-          // 猜测历史
-          GuessHistory({
-            history: this.session.guessHistory
-          })
-            .margin({ top: 16 })
+          // 猜测历史（限制高度）
+          Column() {
+            GuessHistory({
+              history: this.session.guessHistory
+            })
+          }
+          .height(280)
+          .margin({ top: 16 })
 
           // 游戏结果或输入区
           if (this.session.state === GameState.PLAYING) {

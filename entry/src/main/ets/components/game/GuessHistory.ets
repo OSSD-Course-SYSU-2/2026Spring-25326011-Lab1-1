@@ -1,4 +1,4 @@
-import { GuessRecord } from '../../types/models';
+import { GuessRecord, FeedbackItem } from '../../types/models';
 import { FeedbackChar } from './FeedbackChar';
 
 @Component
@@ -18,26 +18,30 @@ export struct GuessHistory {
         .height('100%')
         .justifyContent(FlexAlign.Center)
       } else {
-        List({ space: 12 }) {
+        List({ space: 6 }) {
           ForEach(this.history, (record: GuessRecord, index: number) => {
             ListItem() {
-              Row() {
-                ForEach(record.feedback, (item, i: number) => {
-                  FeedbackChar({
-                    char: item.char,
-                    status: item.status
-                  });
-                })
+              Scroll() {
+                Row() {
+                  ForEach(record.feedback, (item: FeedbackItem, i: number) => {
+                    FeedbackChar({
+                      char: item.char,
+                      status: item.status
+                    });
+                  }, (item: FeedbackItem, i: number) => i.toString())
+                }
+                .justifyContent(FlexAlign.Center)
+                .padding({ left: 4, right: 4 })
               }
               .width('100%')
-              .justifyContent(FlexAlign.Start)
-              .padding({ left: 16, right: 16 })
+              .scrollable(ScrollDirection.Horizontal)
+              .scrollBar(BarState.Off)
             }
-          }, (record: GuessRecord) => record.timestamp.toString())
+          }, (record: GuessRecord, index: number) => index.toString())
         }
         .width('100%')
         .layoutWeight(1)
-        .padding({ top: 16, bottom: 16 })
+        .padding({ top: 8, bottom: 8 })
       }
     }
     .width('100%')

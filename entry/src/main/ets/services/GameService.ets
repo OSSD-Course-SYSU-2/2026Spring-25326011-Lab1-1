@@ -1,21 +1,21 @@
-import { Poem, Question, FeedbackItem, FeedbackStatus, GuessRecord } from '../types/models';
+import { Question, FeedbackItem, FeedbackStatus, GuessRecord } from '../types/models';
 import { GameSession, GameState, HintInfo } from '../types/states';
 import { MatchResult, Result } from '../types/results';
-import { PoemService } from './PoemService';
-import { QuestionService } from './QuestionService';
+import { QuestionRepository } from '../repositories/QuestionRepository';
+import { PoemRepository } from '../repositories/PoemRepository';
 import { StringUtils } from '../utils/StringUtils';
 import { GameConstants } from '../constants/GameConstants';
 
 /**
- * 游戏服务类
+ * 游戏服务类（简化版）
  */
 export class GameService {
-  private poemService: PoemService;
-  private questionService: QuestionService;
+  private questionRepository: QuestionRepository;
+  private poemRepository: PoemRepository;
 
-  constructor(poemService: PoemService, questionService: QuestionService) {
-    this.poemService = poemService;
-    this.questionService = questionService;
+  constructor(questionRepository: QuestionRepository, poemRepository: PoemRepository) {
+    this.questionRepository = questionRepository;
+    this.poemRepository = poemRepository;
   }
 
   /**
@@ -24,29 +24,19 @@ export class GameService {
   async startNewGame(): Promise<Result<GameSession>> {
     try {
       // 获取随机题目
-      const questionResult = await this.questionService.getRandomQuestion();
-      if (!questionResult.success || !questionResult.data) {
-        return { success: false, error: questionResult.error || '获取题目失败' };
+      const question = await this.questionRepository.getRandom();
+      if (!question) {
+        return { success: false, error: '题库为空' };
       }
-
-      const question = questionResult.data;
-
-      // 获取对应诗词
-      const poemResult = await this.poemService.getPoemById(question.poemId);
-      if (!poemResult.success || !poemResult.data) {
-        return { success: false, error: poemResult.error || '获取诗词失败' };
-      }
-
-      const poem = poemResult.data;
 
       // 生成提示信息
-      const hint = this.generateHint(poem, question.content);
+      const hint = this.generateHint(question);
 
       // 初始化游戏会话
       const session: GameSession = {
         state: GameState.PLAYING,
         currentQuestion: question,
-        currentPoem: poem,
+        currentPoem: null,
         remainingGuesses: GameConstants.MAX_GUESSES,
         guessHistory: [],
         hint: hint
@@ -63,7 +53,7 @@ export class GameService {
    */
   async submitGuess(input: string, session: GameSession): Promise<Result<GameSession>> {
     try {
-      if (!session.currentQuestion || !session.currentPoem) {
+      if (!session.currentQuestion) {
         return { success: false, error: '游戏会话无效' };
       }
 
@@ -84,8 +74,8 @@ export class GameService {
         };
       }
 
-      // 检查是否在诗词库中
-      const isValid = await this.poemService.containsVerse(filteredInput);
+      // 检查是否在诗词库中（使用新的验证方法）
+      const isValid = await this.poemRepository.isValidVerseCombination(filteredInput);
 
       if (!isValid) {
         return {
@@ -105,7 +95,12 @@ export class GameService {
       };
 
       // 更新游戏会话
-      const newHistory = [...session.guessHistory, record];
+      const newHistory: GuessRecord[] = [];
+      for (const item of session.guessHistory) {
+        newHistory.push(item);
+      }
+      newHistory.push(record);
+      
       const newRemainingGuesses = session.remainingGuesses - 1;
 
       let newState = session.state;
@@ -116,10 +111,12 @@ export class GameService {
       }
 
       const newSession: GameSession = {
-        ...session,
         state: newState,
+        currentQuestion: session.currentQuestion,
+        currentPoem: session.currentPoem,
         remainingGuesses: newRemainingGuesses,
-        guessHistory: newHistory
+        guessHistory: newHistory,
+        hint: session.hint
       };
 
       return { success: true, data: newSession };
@@ -147,22 +144,29 @@ export class GameService {
     // 第一遍遍历：标记正确位置（绿色）
     const answerCharCount: Map<string, number> = new Map();
     for (const char of answerChars) {
-      answerCharCount.set(char, (answerCharCount.get(char) || 0) + 1);
+      const count = answerCharCount.get(char);
+      if (count !== undefined) {
+        answerCharCount.set(char, count + 1);
+      } else {
+        answerCharCount.set(char, 1);
+      }
     }
 
     for (let i = 0; i < guessChars.length; i++) {
       if (guessChars[i] === answerChars[i]) {
         feedback[i].status = FeedbackStatus.CORRECT;
-        const count = answerCharCount.get(guessChars[i]) || 0;
-        answerCharCount.set(guessChars[i], count - 1);
+        const count = answerCharCount.get(guessChars[i]);
+        if (count !== undefined) {
+          answerCharCount.set(guessChars[i], count - 1);
+        }
       }
     }
 
     // 第二遍遍历：标记错误位置（黄色）或不存在（灰色）
     for (let i = 0; i < guessChars.length; i++) {
       if (feedback[i].status !== FeedbackStatus.CORRECT) {
-        const count = answerCharCount.get(guessChars[i]) || 0;
-        if (count > 0) {
+        const count = answerCharCount.get(guessChars[i]);
+        if (count !== undefined && count > 0) {
           feedback[i].status = FeedbackStatus.MISPLACED;
           answerCharCount.set(guessChars[i], count - 1);
         }
@@ -182,22 +186,31 @@ export class GameService {
   /**
    * 生成提示信息
    */
-  generateHint(poem: Poem, verse: string): HintInfo {
-    const filteredVerse = StringUtils.filterPunctuation(verse);
-    const verseIndex = poem.verses.findIndex((v: string) => {
-      return StringUtils.filterPunctuation(v) === filteredVerse;
-    });
-
+  generateHint(question: Question): HintInfo {
+    console.info(`[GameService] 题目content: ${question.content}`);
+    console.info(`[GameService] 题目id: ${question.id}`);
+    
+    const filteredContent = StringUtils.filterPunctuation(question.content);
+    console.info(`[GameService] 过滤后内容: ${filteredContent}`);
+    console.info(`[GameService] 过滤后字数: ${filteredContent.length}`);
+    
+    // 根据position字段确定提示
     let prevVerseCharCount = 0;
     let nextVerseCharCount = 0;
-    const currentVerseCharCount = filteredVerse.length;
+    const currentVerseCharCount = filteredContent.length;
 
-    if (verseIndex > 0) {
-      prevVerseCharCount = StringUtils.countChars(poem.verses[verseIndex - 1]);
-    }
-
-    if (verseIndex < poem.verses.length - 1) {
-      nextVerseCharCount = StringUtils.countChars(poem.verses[verseIndex + 1]);
+    if (question.position === 'upper') {
+      // 只有上句，提示下句字数
+      if (question.lowerSentence) {
+        nextVerseCharCount = StringUtils.countChars(question.lowerSentence);
+      }
+    } else if (question.position === 'lower') {
+      // 只有下句，提示上句字数
+      if (question.upperSentence) {
+        prevVerseCharCount = StringUtils.countChars(question.upperSentence);
+      }
+    } else if (question.position === 'both') {
+      // 上下句都有，不提示
     }
 
     return {
