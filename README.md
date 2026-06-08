@@ -23,6 +23,10 @@
 ✅ 句间标点规则处理
 ✅ 特殊情况标记支持
 
+预览：
+<img width="458" height="946" alt="image" src="https://github.com/user-attachments/assets/b9b42ce9-40a8-4fd3-b9ea-f78c2cb3f575" />
+
+
 ## 项目结构
 
 ```
