@@ -115,16 +115,29 @@ class GamePage extends ViewPU {
     }
     private viewModel: GameViewModel | null;
     async aboutToAppear() {
-        // 初始化服务和ViewModel
-        const context = getContext(this) as Context;
-        const poemRepo = new PoemRepository(context);
-        const questionRepo = new QuestionRepository(context);
-        await poemRepo.init();
-        await questionRepo.init();
-        const gameService = new GameService(questionRepo, poemRepo);
-        this.viewModel = new GameViewModel(gameService);
-        // 开始新游戏
-        await this.startNewGame();
+        try {
+            console.info('[GamePage] 开始初始化');
+            // 初始化服务和ViewModel
+            const context = getContext(this) as Context;
+            const poemRepo = new PoemRepository(context);
+            const questionRepo = new QuestionRepository(context);
+            console.info('[GamePage] 开始初始化 PoemRepository');
+            await poemRepo.init();
+            console.info('[GamePage] PoemRepository 初始化完成');
+            console.info('[GamePage] 开始初始化 QuestionRepository');
+            await questionRepo.init();
+            console.info('[GamePage] QuestionRepository 初始化完成');
+            const gameService = new GameService(questionRepo, poemRepo);
+            this.viewModel = new GameViewModel(gameService);
+            // 开始新游戏
+            console.info('[GamePage] 开始新游戏');
+            await this.startNewGame();
+            console.info('[GamePage] 初始化完成');
+        }
+        catch (error) {
+            console.error(`[GamePage] 初始化失败: ${error}`);
+            this.errorMessage = `初始化失败: ${error}`;
+        }
     }
     async startNewGame() {
         if (!this.viewModel)
@@ -156,7 +169,7 @@ class GamePage extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GamePage.ets(77:5)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GamePage.ets(91:5)", "entry");
             Column.width('100%');
             Column.height('100%');
             Column.backgroundColor('#F5F5F5');
@@ -172,7 +185,7 @@ class GamePage extends ViewPU {
                         onBackClick: () => {
                             router.back();
                         }
-                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 79, col: 7 });
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 93, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
@@ -196,7 +209,7 @@ class GamePage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 主内容区
             Column.create();
-            Column.debugLine("entry/src/main/ets/pages/GamePage.ets(88:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/GamePage.ets(102:7)", "entry");
             // 主内容区
             Column.width('100%');
             // 主内容区
@@ -216,7 +229,7 @@ class GamePage extends ViewPU {
                                 GameStatus(this, {
                                     remainingGuesses: this.session.remainingGuesses,
                                     totalGuesses: GameConstants.MAX_GUESSES
-                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 91, col: 11 });
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 105, col: 11 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {
@@ -245,7 +258,7 @@ class GamePage extends ViewPU {
                                 // 提示信息
                                 HintDisplay(this, {
                                     hint: this.session.hint
-                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 97, col: 11 });
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 111, col: 11 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {
@@ -265,7 +278,7 @@ class GamePage extends ViewPU {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         // 猜测历史（限制高度）
                         Column.create();
-                        Column.debugLine("entry/src/main/ets/pages/GamePage.ets(103:11)", "entry");
+                        Column.debugLine("entry/src/main/ets/pages/GamePage.ets(117:11)", "entry");
                         // 猜测历史（限制高度）
                         Column.height(280);
                         // 猜测历史（限制高度）
@@ -276,7 +289,7 @@ class GamePage extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new GuessHistory(this, {
                                     history: this.session.guessHistory
-                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 104, col: 13 });
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 118, col: 13 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {
@@ -301,7 +314,7 @@ class GamePage extends ViewPU {
                             this.ifElseBranchUpdateFunction(0, () => {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                                     Column.create();
-                                    Column.debugLine("entry/src/main/ets/pages/GamePage.ets(113:13)", "entry");
+                                    Column.debugLine("entry/src/main/ets/pages/GamePage.ets(127:13)", "entry");
                                     Column.margin({ top: 16 });
                                 }, Column);
                                 {
@@ -313,7 +326,7 @@ class GamePage extends ViewPU {
                                                 onSubmit: () => {
                                                     this.submitGuess();
                                                 }
-                                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 114, col: 15 });
+                                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 128, col: 15 });
                                             ViewPU.create(componentCall);
                                             let paramsLambda = () => {
                                                 return {
@@ -340,7 +353,7 @@ class GamePage extends ViewPU {
                                         this.ifElseBranchUpdateFunction(0, () => {
                                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                                 Text.create(this.errorMessage);
-                                                Text.debugLine("entry/src/main/ets/pages/GamePage.ets(124:17)", "entry");
+                                                Text.debugLine("entry/src/main/ets/pages/GamePage.ets(138:17)", "entry");
                                                 Text.fontSize(14);
                                                 Text.fontColor('#EF4444');
                                                 Text.margin({ top: 8 });
@@ -373,7 +386,7 @@ class GamePage extends ViewPU {
                                                 onNewGame: () => {
                                                     this.startNewGame();
                                                 }
-                                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 132, col: 13 });
+                                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 146, col: 13 });
                                             ViewPU.create(componentCall);
                                             let paramsLambda = () => {
                                                 return {
@@ -404,7 +417,7 @@ class GamePage extends ViewPU {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         // 规则按钮
                         Button.createWithLabel('游戏规则');
-                        Button.debugLine("entry/src/main/ets/pages/GamePage.ets(144:11)", "entry");
+                        Button.debugLine("entry/src/main/ets/pages/GamePage.ets(158:11)", "entry");
                         // 规则按钮
                         Button.width('60%');
                         // 规则按钮
@@ -444,7 +457,7 @@ class GamePage extends ViewPU {
                     LoadingDialog(this, {
                         visible: this.isLoading,
                         message: '加载中...'
-                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 162, col: 7 });
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 176, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {
@@ -472,7 +485,7 @@ class GamePage extends ViewPU {
                         onClose: () => {
                             this.showRules = false;
                         }
-                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 168, col: 7 });
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/GamePage.ets", line: 182, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {

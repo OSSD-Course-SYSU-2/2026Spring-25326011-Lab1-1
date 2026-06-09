@@ -25,21 +25,35 @@ struct GamePage {
   private viewModel: GameViewModel | null = null;
 
   async aboutToAppear() {
-    // 初始化服务和ViewModel
-    const context = getContext(this) as Context;
+    try {
+      console.info('[GamePage] 开始初始化');
+      
+      // 初始化服务和ViewModel
+      const context = getContext(this) as Context;
 
-    const poemRepo = new PoemRepository(context);
-    const questionRepo = new QuestionRepository(context);
+      const poemRepo = new PoemRepository(context);
+      const questionRepo = new QuestionRepository(context);
 
-    await poemRepo.init();
-    await questionRepo.init();
+      console.info('[GamePage] 开始初始化 PoemRepository');
+      await poemRepo.init();
+      console.info('[GamePage] PoemRepository 初始化完成');
 
-    const gameService = new GameService(questionRepo, poemRepo);
+      console.info('[GamePage] 开始初始化 QuestionRepository');
+      await questionRepo.init();
+      console.info('[GamePage] QuestionRepository 初始化完成');
 
-    this.viewModel = new GameViewModel(gameService);
+      const gameService = new GameService(questionRepo, poemRepo);
 
-    // 开始新游戏
-    await this.startNewGame();
+      this.viewModel = new GameViewModel(gameService);
+
+      // 开始新游戏
+      console.info('[GamePage] 开始新游戏');
+      await this.startNewGame();
+      console.info('[GamePage] 初始化完成');
+    } catch (error) {
+      console.error(`[GamePage] 初始化失败: ${error}`);
+      this.errorMessage = `初始化失败: ${error}`;
+    }
   }
 
   async startNewGame() {
