@@ -15522,3 +15522,55 @@ Info: thread count is : 28
 [2026-06-09T14:03:25.371] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
 [2026-06-09T14:03:25.369] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchLog
 [2026-06-09T14:03:25.372] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - Ark compile finished.
+[2026-06-09T14:03:26.319] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchLog
+[2026-06-09T14:03:26.320] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchLog
+[2026-06-09T14:03:26.321] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchLog
+[2026-06-09T14:03:26.322] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchLog
+[2026-06-09T14:03:26.318] [DEBUG] debug-file - watch worker: send response to session manager. Response type: WatchResult
+[2026-06-09T14:03:26.322] [DEBUG] debug-file - session manager: watch message received from worker 1. Type: WatchResult
+[2026-06-09T14:03:26.319] [INFO] debug-file - Finished :entry:default@PreviewArkTS... after 4 s 20 ms 
+[2026-06-09T14:03:26.319] [DEBUG] debug-file - Executing task :entry:PreviewBuild
+[2026-06-09T14:03:26.319] [DEBUG] debug-file - entry : PreviewBuild cost memory 0.0121917724609375
+[2026-06-09T14:03:26.319] [DEBUG] debug-file - runTaskFromQueue task cost before running: 4 s 321 ms 
+[2026-06-09T14:03:26.319] [INFO] debug-file - Finished :entry:PreviewBuild... after 1 ms 
+[2026-06-09T14:03:26.326] [INFO] debug-file - BUILD SUCCESSFUL in 4 s 328 ms 
+[2026-06-09T14:03:26.326] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\Projects\work2\entry\.preview\default\generated\profile\default\ModuleInfo.ts cache.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:D:\Projects\work2\entry\.preview\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\Projects\work2\entry\.preview\default\intermediates\startup\default\startup_config.json cache.
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2026-06-09T14:03:26.327] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2026-06-09T14:03:26.328] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource input file:D:\Projects\work2\entry\src\main\resources cache by regenerate.
+[2026-06-09T14:03:26.328] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource input file:D:\Projects\work2\entry\.preview\default\intermediates\merge_profile\default\module.json cache by regenerate.
+[2026-06-09T14:03:26.328] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource output file:D:\Projects\work2\entry\.preview\default\intermediates\res\default cache.
+[2026-06-09T14:03:26.329] [DEBUG] debug-file - Update task entry:default@PreviewCompileResource output file:D:\Projects\work2\entry\.preview\default\generated\r\default cache.
+[2026-06-09T14:03:26.329] [DEBUG] debug-file - Incremental task entry:default@PreviewCompileResource post-execution cost:2 ms .
+[2026-06-09T14:03:26.329] [DEBUG] debug-file - Update task entry:default@CopyPreviewProfile input file:D:\Projects\work2\entry\src\main\resources\base\profile cache by regenerate.
+[2026-06-09T14:03:26.329] [DEBUG] debug-file - Update task entry:default@CopyPreviewProfile output file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\resources\base\profile cache.
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Incremental task entry:default@CopyPreviewProfile post-execution cost:1 ms .
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Update task entry:default@PreviewUpdateAssets output file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\module.json cache.
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Update task entry:default@PreviewUpdateAssets output file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\resources\base\profile\main_pages.json cache.
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Incremental task entry:default@PreviewUpdateAssets post-execution cost:1 ms .
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\intermediates\loader\default cache by regenerate.
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\resources\rawfile cache by regenerate.
+[2026-06-09T14:03:26.330] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\ResourceTable.txt cache from map.
+[2026-06-09T14:03:26.331] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\intermediates\process_profile\default\module.json cache by regenerate.
+[2026-06-09T14:03:26.331] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2026-06-09T14:03:26.331] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\src\main\ets cache by regenerate.
+[2026-06-09T14:03:26.332] [DEBUG] debug-file - Update task entry:default@PreviewArkTS input file:D:\Projects\work2\entry\.preview\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2026-06-09T14:03:26.332] [DEBUG] debug-file - Update task entry:default@PreviewArkTS output file:D:\Projects\work2\entry\.preview\default\intermediates\loader_out\default\ets cache.
+[2026-06-09T14:03:26.332] [DEBUG] debug-file - Incremental task entry:default@PreviewArkTS post-execution cost:3 ms .
+[2026-06-09T14:03:26.343] [DEBUG] debug-file - There's no busy workers and idle workers need cleanup.
+[2026-06-09T14:03:26.343] [DEBUG] debug-file - hvigor build process will be closed.
