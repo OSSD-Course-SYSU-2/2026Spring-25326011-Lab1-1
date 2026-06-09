@@ -23,7 +23,7 @@
 ✅ 句间标点规则处理
 ✅ 特殊情况标记支持
 
-预览：
+## 预览
 
 开始界面：
 
@@ -101,6 +101,12 @@ entry/
 - 诗词库在poems.json文件中，若输入的诗句属于此文件，才视为合法
 - poems.json文件仍在完善中
 - 2026/6/9：已完善poems.json文件
+
+### 一次开发，多端部署
+- 功能已实现。具体见与README相同目录下的MULTI_DEVICE_DEPLOYMENT.md文件。
+- 平板端预览：
+- <img width="787" height="494" alt="屏幕截图 2026-06-09 142832" src="https://github.com/user-attachments/assets/42d3e56a-cde1-49a7-9494-1ffe132f74c7" />
+
 
 
 
