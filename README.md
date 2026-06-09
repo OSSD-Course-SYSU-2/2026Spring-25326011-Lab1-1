@@ -25,7 +25,14 @@
 
 预览：
 
+开始界面：
+
 <img width="458" height="946" alt="image" src="https://github.com/user-attachments/assets/b9b42ce9-40a8-4fd3-b9ea-f78c2cb3f575" />
+
+若成功：
+
+<img width="355" height="719" alt="image" src="https://github.com/user-attachments/assets/15a6540a-31fe-4e19-82cd-05bea5834426" />
+
 
 
 ## 项目结构
@@ -93,6 +100,7 @@ entry/
 - 题库在questions.json文件中，所有题目选自此文件，一共3k+题目
 - 诗词库在poems.json文件中，若输入的诗句属于此文件，才视为合法
 - poems.json文件仍在完善中
+- 2026/6/9：已完善poems.json文件
 
 
 
